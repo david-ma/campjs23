@@ -1,6 +1,5 @@
 console.log('hey this is gui.ts where the gui code is')
 
-// @ts-nocheck
 
 console.log('Hello World')
 
@@ -8,6 +7,7 @@ let midi = null // global MIDIAccess object
 
 globalThis.midiButton = function () {
   console.log('hey we pushed a midi button')
+  // @ts-ignore
   navigator.permissions.query({ name: 'midi', sysex: true }).then((result) => {
     if (result.state === 'granted') {
       // Access granted.
