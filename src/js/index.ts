@@ -5,16 +5,19 @@ import gui from "./d3spaceship.ts"
 
 
 const options = {
-  height: 600,
-  width: 960
+  width: 960,
+  height: 600
 }
 
-
 gui.setup(options)
-gui.drawSpaceship();
 
+const spaceship = {
+  size: 1,
+  x: 200,
+  y: 300,
+}
 
-
+gui.drawSpaceship(spaceship);
 
 
 
