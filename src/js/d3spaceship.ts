@@ -6,6 +6,7 @@ let width = 960,
   height = 600
 
 const screen = d3.select('#screen').append('svg')
+let shields = null
 
 export function setup(options) {
   console.log('Running setup()')
@@ -68,8 +69,9 @@ export function drawSpaceship(options) {
     .attr('stroke-width', 3)
 
   // Shields?
-  ship
+  shields = ship
     .append('circle')
+    .attr("id", "shields")
     .attr('cx', 10)
     .attr('r', 150)
     .attr('stroke-width', 3)
@@ -77,7 +79,88 @@ export function drawSpaceship(options) {
     .attr('fill', 'none')
 }
 
+
 export default {
   setup,
   drawSpaceship,
+}
+
+
+
+let midi = null // global MIDIAccess object
+
+globalThis.midiButton = function () {
+  console.log('hey we pushed a midi button')
+  // @ts-ignore
+  navigator.permissions.query({ name: 'midi', sysex: true }).then((result) => {
+    if (result.state === 'granted') {
+      // Access granted.
+      console.log('Acceds granted')
+    } else if (result.state === 'prompt') {
+      // Using API will prompt for permission
+      console.log('we should prompt?')
+      function onMIDISuccess(midiAccess) {
+        console.log('MIDI ready!')
+        midi = midiAccess // store in the global (in real usage, would probably keep in an object instance)
+        listInputsAndOutputs(midi)
+        startLoggingMIDIInput(midi, 0)
+      }
+
+      function onMIDIFailure(msg) {
+        console.error(`Failed to get MIDI access - ${msg}`)
+      }
+
+      navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure)
+    }
+    // Permission was denied by user prompt or permission policy
+  })
+}
+
+function listInputsAndOutputs(midiAccess) {
+  for (const entry of midiAccess.inputs) {
+    const input = entry[1]
+    console.log(
+      `Input port [type:'${input.type}']` +
+        ` id:'${input.id}'` +
+        ` manufacturer:'${input.manufacturer}'` +
+        ` name:'${input.name}'` +
+        ` version:'${input.version}'`
+    )
+  }
+
+  for (const entry of midiAccess.outputs) {
+    const output = entry[1]
+    console.log(
+      `Output port [type:'${output.type}'] id:'${output.id}' manufacturer:'${output.manufacturer}' name:'${output.name}' version:'${output.version}'`
+    )
+  }
+}
+
+function onMIDIMessage(event) {
+  let str = `MIDI message received at timestamp ${event.timeStamp}[${event.data.length} bytes]: `
+  let signal = ''
+  for (const character of event.data) {
+    str += `0x${character.toString(16)} `
+    signal += `0x${character.toString(16)} `
+  }
+  if (signal != '0xf8') {
+    // ignore the clock signal 0xf8
+    console.log(str)
+    console.log(signal)
+
+    if(signal.slice(0,8) == '0xb0 0x1') {
+      console.log("heyyy")
+    }
+  }
+  // 0xb0 0x2 0xc 
+  // if (signal === '0xb0') { // This is 
+  //   // blue toggle?
+  //   console.log("hey")
+  // }
+}
+
+function startLoggingMIDIInput(midiAccess, indexOfPort) {
+  midiAccess.inputs.forEach((entry) => {
+    entry.onmidimessage = onMIDIMessage
+  })
 }
