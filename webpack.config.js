@@ -3,13 +3,16 @@ module.exports = {
   mode: 'development',
   entry: './src/js/index.ts',
   output: {
-    path: __dirname + '/public/js',
-    filename: 'index.js',
+    path: __dirname + '/dist/js',
+    filename: 'rapier.js',
   },
   // resolve: {
   //   // mainFields: ['browser', 'module'],
   //   mainFields: ['module', 'browser', 'main'],
   // },
+  experiments: {
+    asyncWebAssembly: true,
+  },
   module: {
     rules: [
       {

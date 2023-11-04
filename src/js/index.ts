@@ -1,3 +1,5 @@
+console.log("helllo this is index.ts where the rapier code is")
+
 import('@dimforge/rapier2d').then(RAPIER => {
   // Use the RAPIER module here.
   let gravity = { x: 0.0, y: -9.81 };

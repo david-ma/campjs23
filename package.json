@@ -13,8 +13,7 @@
     "develop:sync": "sleep 1 && browser-sync start --config bs-config.js",
     "develop:sass": "sass --watch src:public",
     "develop:config": "tsc --project config --preserveWatchOutput --watch",
-    "develop:models": "tsc --project models --preserveWatchOutput --watch",
-    "develop:webpack": "webpack --watch --mode development"
+    "develop:webpack": "webpack --watch --mode production"
   },
   "dependencies": {
     "@dimforge/rapier2d": "^0.11.2",
@@ -26,7 +25,8 @@
     "sass": "^1.69.5",
     "thalia": "github:david-ma/Thalia",
     "typescript": "^5.2.2",
-    "webpack": "^5.89.0"
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   },
   "keywords": [],
   "author": "",
