@@ -89,9 +89,15 @@ function tuneShields(val) {
   }
 }
 
+export function drawAsteroids(asteroids) {
+  console.log("drawing asteroids")
+  
+}
+
 export default {
   setup,
   drawSpaceship,
+  drawAsteroids,
 }
 
 let midi = null // global MIDIAccess object

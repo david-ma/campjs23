@@ -1,12 +1,11 @@
-console.log("hi this is index.ts where the rapier code is")
+console.log('hi this is index.ts where the rapier code is')
 
 // @ts-ignore
-import gui from "./d3spaceship.ts"
-
+import gui from './d3spaceship.ts'
 
 const options = {
   width: 960,
-  height: 600
+  height: 600,
 }
 
 gui.setup(options)
@@ -17,9 +16,20 @@ const spaceship = {
   y: 300,
 }
 
-gui.drawSpaceship(spaceship);
+gui.drawSpaceship(spaceship)
 
+// type Asteroid = {
+//   x: number
+//   y: number
+// }
+const asteroids = [
+  {
+    x: 800,
+    y: 300,
+  },
+]
 
+gui.drawAsteroids(asteroids)
 
 // import('@dimforge/rapier2d').then(RAPIER => {
 //   // Use the RAPIER module here.
@@ -41,7 +51,7 @@ gui.drawSpaceship(spaceship);
 
 //   // Game loop. Replace by your own game loop system.
 //   let gameLoop = () => {
-//     // Ste the simulation forward.  
+//     // Ste the simulation forward.
 //     world.step();
 
 //     // Get and print the rigid-body's position .
@@ -53,4 +63,3 @@ gui.drawSpaceship(spaceship);
 
 //   gameLoop();
 // })
-
