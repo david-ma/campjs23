@@ -32,9 +32,47 @@ export function drawSpaceship(options) {
     .attr('transform', `translate(${options.x}, ${options.y})`)
 
   ship
+    .append('line')
+    .attr('x1', -50)
+    .attr('y1', 50)
+    .attr('x2', 100)
+    .attr('y2', 0)
+    .attr('stroke', 'white')
+    .attr('stroke-width', 3)
+
+  ship
+    .append('line')
+    .attr('x1', -50)
+    .attr('y1', -50)
+    .attr('x2', 100)
+    .attr('y2', 0)
+    .attr('stroke', 'white')
+    .attr('stroke-width', 3)
+
+  ship
+    .append('line')
+    .attr('x1', -50)
+    .attr('y1', 50)
+    .attr('x2', -25)
+    .attr('y2', 0)
+    .attr('stroke', 'white')
+    .attr('stroke-width', 3)
+
+  ship
+    .append('line')
+    .attr('x1', -50)
+    .attr('y1', -50)
+    .attr('x2', -25)
+    .attr('y2', 0)
+    .attr('stroke', 'white')
+    .attr('stroke-width', 3)
+
+  // Shields?
+  ship
     .append('circle')
-    .attr('r', 50)
-    .attr('stroke-width', 5)
+    .attr('cx', 10)
+    .attr('r', 150)
+    .attr('stroke-width', 3)
     .attr('stroke', 'white')
     .attr('fill', 'none')
 }
