@@ -7,13 +7,11 @@
     "build": "npm-run-all --parallel build:*",
     "develop": "npm-run-all --parallel develop:*",
     "build:webpack": "webpack --mode production",
-    "build:config": "tsc --project config",
     "build:sass": "sass src:public",
     "develop:server": "npm start",
     "develop:sync": "sleep 1 && browser-sync start --config bs-config.js",
     "develop:sass": "sass --watch src:public",
-    "develop:config": "tsc --project config --preserveWatchOutput --watch",
-    "develop:webpack": "webpack --watch --mode production"
+    "develop:webpack": "webpack --watch --mode development"
   },
   "dependencies": {
     "@dimforge/rapier2d": "^0.11.2",

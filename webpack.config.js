@@ -4,7 +4,7 @@ module.exports = {
   entry: './src/js/index.ts',
   output: {
     path: __dirname + '/dist/js',
-    filename: 'rapier.js',
+    filename: 'index.js',
   },
   // resolve: {
   //   // mainFields: ['browser', 'module'],

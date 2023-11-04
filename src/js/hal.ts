@@ -1,5 +1,7 @@
 console.log('hey this is gui.ts where the gui code is')
 
+export const hello = "world"
+
 
 console.log('Hello World')
 
