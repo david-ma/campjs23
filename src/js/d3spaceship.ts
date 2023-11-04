@@ -71,7 +71,7 @@ export function drawSpaceship(options) {
   // Shields?
   shields = ship
     .append('circle')
-    .attr("id", "shields")
+    .attr('id', 'shields')
     .attr('cx', 10)
     .attr('r', 150)
     .attr('stroke-width', 3)
@@ -79,13 +79,20 @@ export function drawSpaceship(options) {
     .attr('fill', 'none')
 }
 
+var shieldVal = 0
+function tuneShields(val) {
+  console.log(val)
+  if (shieldVal) {
+    shields.attr('stroke-width', val)
+  } else {
+    shieldVal = 1
+  }
+}
 
 export default {
   setup,
   drawSpaceship,
 }
-
-
 
 let midi = null // global MIDIAccess object
 
@@ -139,21 +146,25 @@ function listInputsAndOutputs(midiAccess) {
 function onMIDIMessage(event) {
   let str = `MIDI message received at timestamp ${event.timeStamp}[${event.data.length} bytes]: `
   let signal = ''
+  let val = 0
   for (const character of event.data) {
+    // console.log('char', character)
     str += `0x${character.toString(16)} `
     signal += `0x${character.toString(16)} `
+    val = character
   }
   if (signal != '0xf8') {
     // ignore the clock signal 0xf8
     console.log(str)
     console.log(signal)
 
-    if(signal.slice(0,8) == '0xb0 0x1') {
-      console.log("heyyy")
+    if (signal.slice(0, 8) == '0xb0 0x1') {
+      console.log('heyyy')
+      tuneShields(val)
     }
   }
-  // 0xb0 0x2 0xc 
-  // if (signal === '0xb0') { // This is 
+  // 0xb0 0x2 0xc
+  // if (signal === '0xb0') { // This is
   //   // blue toggle?
   //   console.log("hey")
   // }
