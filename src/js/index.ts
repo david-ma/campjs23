@@ -1,9 +1,17 @@
 console.log("hi this is index.ts where the rapier code is")
 
 // @ts-ignore
-import { drawSpaceship } from "./d3spaceship.ts"
+import gui from "./d3spaceship.ts"
 
-drawSpaceship();
+
+const options = {
+  height: 600,
+  width: 960
+}
+
+
+gui.setup(options)
+gui.drawSpaceship();
 
 
 

@@ -6,10 +6,11 @@ module.exports = {
     path: __dirname + '/dist/js',
     filename: 'index.js',
   },
-  // resolve: {
-  //   // mainFields: ['browser', 'module'],
-  //   mainFields: ['module', 'browser', 'main'],
-  // },
+  resolve: {
+    mainFields: ['module']
+    // mainFields: ['browser', 'module'],
+    // mainFields: ['module', 'browser', 'main'],
+  },
   experiments: {
     asyncWebAssembly: true,
   },
