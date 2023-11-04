@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "baseUrl": "src",
+    "outDir": "dist",
+    "declaration": true,
+    // "types": ["node"],
+    // "typeRoots": ["../../node_modules/@types/d3-selection-multi/index.d.ts"],
+    // "target": "ES2015",
+    "module": "AMD",
+    "target": "es2017",
+    // "module": "es2020",
+    "moduleResolution": "node",
+    "paths": {
+      "chart": ["js/chart.ts"]
+    },
+    "allowUmdGlobalAccess": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": false,
+    "assumeChangesOnlyAffectDirectDependencies": true,
+    "incremental": true,
+    "lib": [ "esnext", "dom.iterable", "dom"]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "config",
+    "models"
+  ]
+}
