@@ -17,6 +17,22 @@ const options = {
 
 let screen = gui.setup(options)
 
+let audioContext = null,
+    audio = null
+
+function initAudio() {
+  audioContext = new AudioContext();
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+
+  const now = audioContext.currentTime;
+  audio = new Audio("/audio/engines.m4a");
+  const source = audioContext.createMediaElementSource(audio);
+  source.connect(audioContext.destination);
+}
+
 import('@dimforge/rapier2d').then((RAPIER) => {
   let game = new Game(RAPIER, options)
 
@@ -51,6 +67,9 @@ import('@dimforge/rapier2d').then((RAPIER) => {
   // Get mouse pos
 
   screen.on("click", function (event) {
+    if(!audio) {
+      initAudio()
+    }
     var coordinates = d3.pointer(event);
     var x = coordinates[0];
     var y = coordinates[1];
@@ -62,6 +81,12 @@ import('@dimforge/rapier2d').then((RAPIER) => {
 
 
   addEventListener('keypress', (event) => {
+    console.log("Press!")
+    if(audio) {
+      audio.play()
+    }
+
+    // audio.start
     switch (event.key) {
       case 'w':
         game.spaceship.move('up')
@@ -78,11 +103,12 @@ import('@dimforge/rapier2d').then((RAPIER) => {
     }
   })
 
-    screen.append("circle")
-      .attr("cx", x)
-      .attr("cy", y)
-      .attr("r", ballsize)
-      .attr("fill", 'red')
+    // screen.append("circle")
+    //   .attr("cx", x)
+    //   .attr("cy", y)
+    //   .attr("r", ballsize)
+    //   .attr("fill", 'red')
+      // .style("display", 'none')
       
 
     console.log("coordinates", coordinates);
@@ -107,7 +133,7 @@ import('@dimforge/rapier2d').then((RAPIER) => {
     setTimeout(gameLoop, 16)
   }
 
-  gameLoop()
+  gui.welcome(gameLoop)
 })
 
 // function draw(timestamp) {

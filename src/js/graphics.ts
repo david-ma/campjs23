@@ -85,6 +85,34 @@ export default {
   drawAsteroids,
   init,
   update,
+  welcome,
+}
+
+function welcome(callback) {
+  const welcome = screen.append('g')
+
+  welcome
+    .append('rect')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('height', height)
+    .attr('width', width)
+    .attr('fill', '#b91321')
+
+  welcome
+    .append('image')
+    .attr('href', '/image/welcome.png')
+    .attr('x', 100)
+    .attr('y', 10)
+    // .attr('preserveAspectRatio', 1)
+    .attr('height', '500')
+    .attr('width', '800')
+  // .attr('height')
+
+  welcome.on('click', function (d) {
+    welcome.remove()
+    callback()
+  })
 }
 
 function init(game) {
@@ -107,7 +135,6 @@ function update(game: Game) {
   const asteroids = screen
     .selectAll('g.asteroid')
     .data(game.asteroids, (d: Asteroid) => {
-      console.log(d.uniqueID)
       return d.uniqueID
     })
 

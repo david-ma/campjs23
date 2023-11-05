@@ -25,6 +25,7 @@ export class SpaceShip {
   }
 
   move(direction) {
+    console.log("moving ship")
     if (direction === 'up') {
       this.y -= 50
     }

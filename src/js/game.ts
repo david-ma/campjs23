@@ -30,18 +30,18 @@ export class Game {
 // const track = this.wooshAudioContext.createMediaElementSource(wooshSound);
 
     // this.bind
-    this.asteroids.push(new Asteroid(this))
-    this.asteroids.push(new Asteroid(this))
-    this.asteroids.push(new Asteroid(this))
-    this.asteroids.push(new Asteroid(this))
-    this.asteroids.push(new Asteroid(this))
-    this.asteroids.push(new Asteroid(this))
-    this.asteroids.push(new Asteroid(this))
-    this.asteroids.push(new Asteroid(this))
-    this.asteroids.push(new Asteroid(this))
-    this.asteroids.push(new Asteroid(this))
-    this.asteroids.push(new Asteroid(this))
-    this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
 
     // this.SpawnAsteroid.bind(this)
     
@@ -88,8 +88,10 @@ export class Game {
       console.log("Something went wrong");
       console.log("asteroid", asteroid)
       console.log("otherCollider", otherCollider)
-      
-      debugger;
+      var audio = new Audio("/audio/crash.m4a")
+      audio.play()
+  
+    //   debugger;
     } else {
         console.log("refelct asteroid", asteroid)
       asteroid.reflect();
