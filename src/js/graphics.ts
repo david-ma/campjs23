@@ -1,6 +1,9 @@
 console.log('Drawing a d3 spaceship')
 
+import { Asteroid } from './asteroid'
+import { Game } from './game'
 import * as d3 from 'd3'
+
 // import * as d3 from 'd3-selection-multi'
 let width = 960,
   height = 600
@@ -23,7 +26,7 @@ export function setup(options) {
     .attr('width', width)
     .attr('fill', '#8357a4')
 
-  return screen;
+  return screen
 }
 
 export function drawSpaceship(spaceship) {
@@ -33,43 +36,23 @@ export function drawSpaceship(spaceship) {
 
   const ship = screen
     .append('g')
+    .attr('id', 'enterprise')
     .attr('transform', `translate(${options.x}, ${options.y})`)
 
-  ship
-    .append('line')
-    .attr('x1', -50)
-    .attr('y1', 50)
-    .attr('x2', 100)
-    .attr('y2', 0)
-    .attr('stroke', 'white')
-    .attr('stroke-width', 3)
+  const spaceshipShape = [
+    [-50, 50],
+    [100, 0],
+    [-50, -50],
+    [-25, 0],
+    [-50, 50],
+  ]
 
   ship
-    .append('line')
-    .attr('x1', -50)
-    .attr('y1', -50)
-    .attr('x2', 100)
-    .attr('y2', 0)
+    .append('polyline')
+    .attr('points', spaceshipShape.map((d) => d.join(',')).join(' '))
     .attr('stroke', 'white')
     .attr('stroke-width', 3)
-
-  ship
-    .append('line')
-    .attr('x1', -50)
-    .attr('y1', 50)
-    .attr('x2', -25)
-    .attr('y2', 0)
-    .attr('stroke', 'white')
-    .attr('stroke-width', 3)
-
-  ship
-    .append('line')
-    .attr('x1', -50)
-    .attr('y1', -50)
-    .attr('x2', -25)
-    .attr('y2', 0)
-    .attr('stroke', 'white')
-    .attr('stroke-width', 3)
+    .attr('fill', 'none')
 
   // Shields?
   shields = ship
@@ -100,6 +83,21 @@ export default {
   setup,
   drawSpaceship,
   drawAsteroids,
+  init,
+  update,
+}
+
+function init(game) {
+  drawSpaceship(game.spaceship)
+  game.asteroids.forEach((asteroid) => {
+    drawAsteroids(asteroid)
+  })
+}
+
+function update(game: Game) {
+  // Do stuff to update the game... nothing for now.
+  const ship = game.spaceship.Position
+  d3.select('#enterprise').attr('transform', `translate(${ship.x}, ${ship.y})`)
 }
 
 let midi = null // global MIDIAccess object

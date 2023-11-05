@@ -4,6 +4,8 @@ import { Game } from './game'
 export class SpaceShip {
   public _rigidBody: RigidBody
   public shieldRad: number = 150
+  private x: number = 200
+  private y: number = 300
 
   constructor(private game: Game) {
     let rigidBodyDesc =
@@ -19,14 +21,23 @@ export class SpaceShip {
       game.rapier.ActiveCollisionTypes.KINEMATIC_FIXED);
   }
 
+  move(direction) {
+    if (direction === 'up') {
+      this.y -= 50
+    }
+    if (direction === 'down') {
+      this.y += 50
+    }
+  }
+
   get Position() {
     // This didn't work :(
     // return this._rigidBody.translation()
 
     // I'm (currently) writing the drawer to expect this:
     return {
-      x: 200,
-      y: 300,
+      x: this.x,
+      y: this.y,
     }
   }
 }
