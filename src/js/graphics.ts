@@ -96,24 +96,55 @@ function init(game) {
 }
 
 function update(game: Game) {
-  console.log("Updating game")
+  console.log('Updating game')
   // console.log(game.asteroids)
   // Do stuff to update the game... nothing for now.
   const ship = game.spaceship.Position
   d3.select('#enterprise')
-  .transition()
-  .attr('transform', `translate(${ship.x}, ${ship.y})`)
+    .transition()
+    .attr('transform', `translate(${ship.x}, ${ship.y})`)
 
-  screen.selectAll('g.asteroid').data(game.asteroids)
+  const asteroids = screen
+    .selectAll('g.asteroid')
+    .data(game.asteroids, (d: Asteroid) => {
+      return d.uniqueID
+    })
+
+  asteroids
     .enter()
     .append('g')
     .classed('asteroid', true)
+    .attr('transform', (d) => {
+      return `translate(${d.Position.x}, ${d.Position.y})`
+    })
     .append('circle')
-    .attr('cx', d =>{return d.Position.x})
-    .attr('cy', d =>{ return d.Position.y})
-    .attr('r', 20)
+    .attr('cx', 0)
+    .attr('cy', 0)
+    .attr('r', (d) => {
+      return d.radius || 20
+    })
+    .attr('fill', 'none')
     .attr('stroke', 'red')
     .attr('stroke-width', 3)
+
+  // circle.transition()
+  // .duration(500)
+  // .attr("cx", place_circle)
+  // .attr("cy", baseLine.y)
+  // .attr("r", (d,i) => d);
+  asteroids
+    .transition()
+    .duration(16)
+    .attr('transform', (d) => {
+      return `translate(${d.Position.x}, ${d.Position.y})`
+    })
+  // .attr('cx', (d) => {
+  //   console.log(`Spawning new asteroid: ${d.uniqueID}`)
+  //   return d.Position.x
+  // })
+  // .attr('cy', (d) => {
+  //   return d.Position.y
+  // })
 }
 
 let midi = null // global MIDIAccess object

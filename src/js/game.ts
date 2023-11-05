@@ -31,8 +31,17 @@ export class Game {
 
     // this.bind
     this.asteroids.push(new Asteroid(this))
-    // this.asteroids.push(new Asteroid(this))
-    // this.asteroids.push(new Asteroid(this))
+    this.asteroids.push(new Asteroid(this))
+    this.asteroids.push(new Asteroid(this))
+    this.asteroids.push(new Asteroid(this))
+    this.asteroids.push(new Asteroid(this))
+    this.asteroids.push(new Asteroid(this))
+    this.asteroids.push(new Asteroid(this))
+    this.asteroids.push(new Asteroid(this))
+    this.asteroids.push(new Asteroid(this))
+    this.asteroids.push(new Asteroid(this))
+    this.asteroids.push(new Asteroid(this))
+    this.asteroids.push(new Asteroid(this))
 
     // this.SpawnAsteroid.bind(this)
     
