@@ -32,9 +32,10 @@ export function setup(options) {
   return screen;
 }
 
-export function drawSpaceship(options) {
+export function drawSpaceship(spaceship) {
   console.log('drawing ship')
   console.log(d3)
+  const options = spaceship.Position
 
   const ship = screen
     .append('g')

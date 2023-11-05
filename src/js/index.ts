@@ -46,6 +46,8 @@ import('@dimforge/rapier2d').then((RAPIER) => {
     // Ste the simulation forward.
     game.step()
 
+    console.log("Hi we're here")
+    console.log("game", game)
     gui.drawSpaceship(game.spaceship)
 
     game.asteroids.forEach((asteroid) => {
