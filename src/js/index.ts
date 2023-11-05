@@ -54,17 +54,12 @@ screen.on("click", function (event) {
 });
 
   // // Game loop. Replace by your own game loop system.
+  gui.init(game)
   let gameLoop = () => {
     // Ste the simulation forward.
     game.step()
 
-    console.log("Hi we're here")
-    console.log("game", game)
-    gui.drawSpaceship(game.spaceship)
-
-    game.asteroids.forEach((asteroid) => {
-      gui.drawAsteroids(asteroid);
-    });
+    gui.update(game)
 
     setTimeout(gameLoop, 16);
   };

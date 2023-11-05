@@ -1,6 +1,9 @@
 console.log('Drawing a d3 spaceship')
 
+import { Asteroid } from './asteroid'
+import { Game } from './game'
 import * as d3 from 'd3'
+
 // import * as d3 from 'd3-selection-multi'
 let width = 960,
   height = 600
@@ -23,7 +26,7 @@ export function setup(options) {
     .attr('width', width)
     .attr('fill', '#8357a4')
 
-  return screen;
+  return screen
 }
 
 export function drawSpaceship(spaceship) {
@@ -100,6 +103,19 @@ export default {
   setup,
   drawSpaceship,
   drawAsteroids,
+  init,
+  update,
+}
+
+function init(game) {
+  drawSpaceship(game)
+  game.asteroids.forEach((asteroid) => {
+    drawAsteroids(asteroid)
+  })
+}
+
+function update(game: Game) {
+  // Do stuff to update the game... nothing for now.
 }
 
 let midi = null // global MIDIAccess object
