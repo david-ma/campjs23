@@ -19,6 +19,13 @@ export class SpaceShip {
   }
 
   get Position() {
-    return this._rigidBody.translation()
+    // This didn't work :(
+    // return this._rigidBody.translation()
+
+    // I'm (currently) writing the drawer to expect this:
+    return {
+      x: 200,
+      y: 300,
+    }
   }
 }

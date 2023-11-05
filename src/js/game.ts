@@ -14,6 +14,7 @@ export class Game {
     // let gravity = new rapier2d.Vector2(0.0, -9.81);
     let gravity = new rapier.Vector2(0, 0)
     this.world = new rapier.World(gravity)
+    this.spaceship = new SpaceShip(this);
     this.asteroids = []
   }
 

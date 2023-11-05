@@ -54,9 +54,13 @@ screen.on("click", function (event) {
 });
 
   // // Game loop. Replace by your own game loop system.
-  let gameLoop = () => { const ship = screen
-    .append('g')
-    .attr('transform', `translate(${options.x}, ${options.y})`)
+  let gameLoop = () => {
+    // Ste the simulation forward.
+    game.step()
+
+    console.log("Hi we're here")
+    console.log("game", game)
+    gui.drawSpaceship(game.spaceship)
 
     game.asteroids.forEach((asteroid) => {
       gui.drawAsteroids(asteroid);
