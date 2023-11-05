@@ -2,7 +2,14 @@ console.log('hi this is index.ts where the rapier code is')
 
 // @ts-ignore
 import gui from './d3spaceship.ts'
-import { Game } from './game.js'
+// @ts-ignore
+import { Game } from './game.ts'
+
+// function draw(timestamp) {
+//   drawBackground();
+//   drawPlayer();
+//   requestAnimationFrame(draw)
+// }
 
 const options = {
   width: 960,

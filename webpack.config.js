@@ -7,7 +7,7 @@ module.exports = {
     filename: 'index.js',
   },
   resolve: {
-    mainFields: ['module']
+    mainFields: ['module'],
     // mainFields: ['browser', 'module'],
     // mainFields: ['module', 'browser', 'main'],
   },
@@ -16,6 +16,16 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.m?ts$|\.tsx?$/,
+        // exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader',
+          options: {
+            onlyCompileBundledFiles: true,
+          },
+        },
+      },
       {
         test: /\.(?:js|mjs|cjs)$/,
         exclude: /node_modules/,

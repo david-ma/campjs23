@@ -22,6 +22,13 @@ export function setup(options) {
     .attr('height', height)
     .attr('width', width)
     .attr('fill', '#8357a4')
+
+  screen.on('click', function () {
+    var coordinates = d3.pointer(this)
+    var x = coordinates[0]
+    var y = coordinates[1]
+    console.log('coordinates', coordinates)
+  })
 }
 
 export function drawSpaceship(options) {
@@ -90,8 +97,7 @@ function tuneShields(val) {
 }
 
 export function drawAsteroids(asteroids) {
-  console.log("drawing asteroids")
-  
+  console.log('drawing asteroids')
 }
 
 export default {
@@ -159,7 +165,7 @@ function onMIDIMessage(event) {
     signal += `0x${character.toString(16)} `
     val = character
   }
-  if (signal != '0xf8') {
+  if (signal != '0xf8 ') {
     // ignore the clock signal 0xf8
     console.log(str)
     console.log(signal)
