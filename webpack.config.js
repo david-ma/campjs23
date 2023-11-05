@@ -8,6 +8,7 @@ module.exports = {
   },
   resolve: {
     mainFields: ['module'],
+    extensions: ['.ts', '.js'],
     // mainFields: ['browser', 'module'],
     // mainFields: ['module', 'browser', 'main'],
   },

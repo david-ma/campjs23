@@ -1,9 +1,7 @@
 console.log('hi this is index.ts where the rapier code is')
 
-// @ts-ignore
-import gui from './d3spaceship.ts'
-// @ts-ignore
-import { Game } from './game.ts'
+import gui from './d3spaceship'
+import { Game } from './game'
 
 // function draw(timestamp) {
 //   drawBackground();
