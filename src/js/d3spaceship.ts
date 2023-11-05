@@ -23,8 +23,8 @@ export function setup(options) {
     .attr('width', width)
     .attr('fill', '#8357a4')
 
-  screen.on('click', function () {
-    var coordinates = d3.pointer(this)
+  screen.on('click', function (event) {
+    var coordinates = d3.pointer(event)
     var x = coordinates[0]
     var y = coordinates[1]
     console.log('coordinates', coordinates)
