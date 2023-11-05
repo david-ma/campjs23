@@ -29,6 +29,7 @@ export function setup(options) {
     var y = coordinates[1]
     console.log('coordinates', coordinates)
   })
+  return screen;
 }
 
 export function drawSpaceship(options) {
