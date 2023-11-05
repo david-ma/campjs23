@@ -1,13 +1,7 @@
 console.log('hi this is index.ts where the rapier code is')
 
-import gui from './d3spaceship'
+import gui, { drawSpaceship } from './d3spaceship'
 import { Game } from './game'
-
-// function draw(timestamp) {
-//   drawBackground();
-//   drawPlayer();
-//   requestAnimationFrame(draw)
-// }
 
 const options = {
   width: 960,
@@ -16,29 +10,9 @@ const options = {
 
 gui.setup(options)
 
-const spaceship = {
-  size: 1,
-  x: 200,
-  y: 300,
-}
+import('@dimforge/rapier2d').then((RAPIER) => {
+  let game = new Game(RAPIER, options)
 
-gui.drawSpaceship(spaceship)
-
-// type Asteroid = {
-//   x: number
-//   y: number
-// }
-const asteroids = [
-  {
-    x: 800,
-    y: 300,
-  },
-]
-
-gui.drawAsteroids(asteroids)
-
-import('@dimforge/rapier2d').then(RAPIER => {
-  let game = new Game(RAPIER);
   // Use the RAPIER module here.
   // let gravity = { x: 0.0, y: -9.81 };
   // let world = new RAPIER.World(gravity);
@@ -57,28 +31,56 @@ import('@dimforge/rapier2d').then(RAPIER => {
   // let collider = world.createCollider(colliderDesc, rigidBody);
 
   //make a collider on the mouse and make a debug collision thing on it
-        let rigidBodyDesc = game.rapier.RigidBodyDesc.kinematicPositionBased()
-            .setTranslation(
-                800,
-                300,
+  let rigidBodyDesc =
+    game.rapier.RigidBodyDesc.kinematicPositionBased().setTranslation(800, 300)
 
-            );
-
-        let rigidBody = game.world.createRigidBody(rigidBodyDesc);
-        let colliderDesc = game.rapier.ColliderDesc.ball(100);
-        let collider = game.world.createCollider(colliderDesc, rigidBody);
-        // Get mouse pos
-        // var 
-        // rigidBody.setTranslation()
-
+  let rigidBody = game.world.createRigidBody(rigidBodyDesc)
+  let colliderDesc = game.rapier.ColliderDesc.ball(100)
+  let collider = game.world.createCollider(colliderDesc, rigidBody)
+  // Get mouse pos
+  // var
+  // rigidBody.setTranslation()
 
   // // Game loop. Replace by your own game loop system.
   let gameLoop = () => {
     // Ste the simulation forward.
-    game.step();
+    game.step()
 
-    setTimeout(gameLoop, 16);
-  };
+    gui.drawSpaceship(game.spaceship)
 
-  gameLoop();
+    game.asteroids.forEach((asteroid) => {
+      gui.drawAsteroids(asteroid)
+    })
+
+    setTimeout(gameLoop, 16)
+  }
+
+  gameLoop()
 })
+
+// function draw(timestamp) {
+//   drawBackground();
+//   drawPlayer();
+//   requestAnimationFrame(draw)
+// }
+
+// const spaceship = {
+//   size: 1,
+//   x: 200,
+//   y: 300,
+// }
+
+// gui.drawSpaceship(spaceship)
+
+// // type Asteroid = {
+// //   x: number
+// //   y: number
+// // }
+// const asteroids = [
+//   {
+//     x: 800,
+//     y: 300,
+//   },
+// ]
+
+// gui.drawAsteroids(asteroids)
