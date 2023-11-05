@@ -69,6 +69,12 @@ import('@dimforge/rapier2d').then((RAPIER) => {
       case 's':
         game.spaceship.move('down')
         break
+      case 'd':
+        game.spaceship.move('forward')
+        break
+      case 'a':
+        game.spaceship.move('backward')
+        break
     }
   })
 
