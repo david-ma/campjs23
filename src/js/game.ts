@@ -28,7 +28,7 @@ export class Game {
     this.wooshSound = document.getElementById("wooshSound") as (HTMLAudioElement);
 // pass it into the audio context
 // const track = this.wooshAudioContext.createMediaElementSource(wooshSound);
-
+    setInterval(this.SpawnAsteroid, 500);
   }
 
   SpawnAsteroid() {
