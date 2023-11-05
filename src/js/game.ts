@@ -28,19 +28,28 @@ export class Game {
     this.wooshSound = document.getElementById("wooshSound") as (HTMLAudioElement);
 // pass it into the audio context
 // const track = this.wooshAudioContext.createMediaElementSource(wooshSound);
-    setInterval(this.SpawnAsteroid, 500);
+
+    // this.bind
+    this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+    // this.asteroids.push(new Asteroid(this))
+
+    // this.SpawnAsteroid.bind(this)
+    
+    // setInterval(this.SpawnAsteroid, 500);
   }
 
   SpawnAsteroid() {
     this.asteroids.push(new Asteroid(this));
   }
+
   step() {
     this.world.step(this.eventQueue)
     this.world.debugRender();
     this.asteroids.forEach(asteroid => {
         asteroid
     })
-    console.log(this.spaceship.Position);
+    // console.log(this.spaceship.Position);
     
     // debugger;
     

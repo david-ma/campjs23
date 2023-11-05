@@ -89,17 +89,31 @@ export default {
 
 function init(game) {
   drawSpaceship(game.spaceship)
+
   game.asteroids.forEach((asteroid) => {
     drawAsteroids(asteroid)
   })
 }
 
 function update(game: Game) {
+  console.log("Updating game")
+  // console.log(game.asteroids)
   // Do stuff to update the game... nothing for now.
   const ship = game.spaceship.Position
   d3.select('#enterprise')
   .transition()
   .attr('transform', `translate(${ship.x}, ${ship.y})`)
+
+  screen.selectAll('g.asteroid').data(game.asteroids)
+    .enter()
+    .append('g')
+    .classed('asteroid', true)
+    .append('circle')
+    .attr('cx', d =>{return d.Position.x})
+    .attr('cy', d =>{ return d.Position.y})
+    .attr('r', 20)
+    .attr('stroke', 'red')
+    .attr('stroke-width', 3)
 }
 
 let midi = null // global MIDIAccess object

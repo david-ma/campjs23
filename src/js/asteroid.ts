@@ -3,8 +3,8 @@ import { Game, rapier2d } from './game'
 import { makeLogger } from 'ts-loader/dist/logger';
 const minRad = 100;
 const maxRad = 300;
-const minVel = 10;
-const maxVel = 40;
+const minVel = 200;
+const maxVel = 500;
 
 
 function magnitude(vel: Vector2) {
@@ -15,6 +15,8 @@ export class Asteroid {
   public radius: number;
 
   constructor(game: Game) {
+    console.log("Constructing Asteroid")
+
     // Create a dynamic rigid-body.
     let randx = game.options.width + Math.random() * 50;
     let randy = Math.random() * game.options.height;
@@ -39,6 +41,10 @@ export class Asteroid {
 
   get Position() {
     return this._rigidBody.translation()
+  }
+
+  get uniqueID() {
+    return this._rigidBody.collider(0).handle
   }
   
   reflect() {
