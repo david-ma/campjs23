@@ -38,41 +38,20 @@ export function drawSpaceship(spaceship) {
     .append('g')
     .attr('transform', `translate(${options.x}, ${options.y})`)
 
-  ship
-    .append('line')
-    .attr('x1', -50)
-    .attr('y1', 50)
-    .attr('x2', 100)
-    .attr('y2', 0)
-    .attr('stroke', 'white')
-    .attr('stroke-width', 3)
+  const spaceshipShape = [
+    [-50, 50],
+    [100, 0],
+    [-50, -50],
+    [-25, 0],
+    [-50, 50],
+  ]
 
   ship
-    .append('line')
-    .attr('x1', -50)
-    .attr('y1', -50)
-    .attr('x2', 100)
-    .attr('y2', 0)
+    .append('polyline')
+    .attr('points', spaceshipShape.map((d) => d.join(',')).join(' '))
     .attr('stroke', 'white')
     .attr('stroke-width', 3)
-
-  ship
-    .append('line')
-    .attr('x1', -50)
-    .attr('y1', 50)
-    .attr('x2', -25)
-    .attr('y2', 0)
-    .attr('stroke', 'white')
-    .attr('stroke-width', 3)
-
-  ship
-    .append('line')
-    .attr('x1', -50)
-    .attr('y1', -50)
-    .attr('x2', -25)
-    .attr('y2', 0)
-    .attr('stroke', 'white')
-    .attr('stroke-width', 3)
+    .attr('fill', 'none')
 
   // Shields?
   shields = ship
@@ -108,7 +87,7 @@ export default {
 }
 
 function init(game) {
-  drawSpaceship(game)
+  drawSpaceship(game.spaceship)
   game.asteroids.forEach((asteroid) => {
     drawAsteroids(asteroid)
   })
