@@ -1,20 +1,19 @@
-console.log("hi this is index.ts where the rapier code is");
+console.log('hi this is index.ts where the rapier code is')
 
-import gui, { drawSpaceship } from "./graphics";
-import { Game } from "./game";
+import gui, { drawSpaceship } from './graphics'
+import { Game } from './game'
 import * as d3 from 'd3'
-import { Vector2 } from "@dimforge/rapier2d";
+import { Vector2 } from '@dimforge/rapier2d'
 
 const options = {
   width: 960,
   height: 600,
-};
+}
 
-let screen = gui.setup(options);
+let screen = gui.setup(options)
 
-
-import("@dimforge/rapier2d").then((RAPIER) => {
-  let game = new Game(RAPIER, options);
+import('@dimforge/rapier2d').then((RAPIER) => {
+  let game = new Game(RAPIER, options)
 
   // Use the RAPIER module here.
   // let gravity = { x: 0.0, y: -9.81 };
@@ -35,23 +34,34 @@ import("@dimforge/rapier2d").then((RAPIER) => {
 
   //make a collider on the mouse and make a debug collision thing on it
   let rigidBodyDesc =
-    game.rapier.RigidBodyDesc.kinematicPositionBased().setTranslation(800, 300);
+    game.rapier.RigidBodyDesc.kinematicPositionBased().setTranslation(800, 300)
 
-  let rigidBody = game.world.createRigidBody(rigidBodyDesc);
-  const ballsize = 100;
-  let colliderDesc = game.rapier.ColliderDesc.ball(ballsize);
-  let collider = game.world.createCollider(colliderDesc, rigidBody);
+  let rigidBody = game.world.createRigidBody(rigidBodyDesc)
+  const ballsize = 100
+  let colliderDesc = game.rapier.ColliderDesc.ball(ballsize)
+  let collider = game.world.createCollider(colliderDesc, rigidBody)
   // Get mouse pos
 
-screen.on("click", function (event) {
-  var coordinates = d3.pointer(event);
-  var x = coordinates[0];
-  var y = coordinates[1];
-  rigidBody.setTranslation(new Vector2(x, y), true)
-  //Draw ball on mouse
-  
-  console.log("coordinates", coordinates);
-});
+  screen.on('click', function (event) {
+    var coordinates = d3.pointer(event)
+    var x = coordinates[0]
+    var y = coordinates[1]
+    rigidBody.setTranslation(new Vector2(x, y), true)
+    //Draw ball on mouse
+
+    console.log('coordinates', coordinates)
+  })
+
+  addEventListener('keypress', (event) => {
+    switch (event.key) {
+      case 'w':
+        game.spaceship.move('up')
+        break
+      case 's':
+        game.spaceship.move('down')
+        break
+    }
+  })
 
   // // Game loop. Replace by your own game loop system.
   gui.init(game)
@@ -61,11 +71,11 @@ screen.on("click", function (event) {
 
     gui.update(game)
 
-    setTimeout(gameLoop, 16);
-  };
+    setTimeout(gameLoop, 16)
+  }
 
-  gameLoop();
-});
+  gameLoop()
+})
 
 // function draw(timestamp) {
 //   drawBackground();

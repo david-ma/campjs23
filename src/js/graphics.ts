@@ -36,6 +36,7 @@ export function drawSpaceship(spaceship) {
 
   const ship = screen
     .append('g')
+    .attr('id', 'enterprise')
     .attr('transform', `translate(${options.x}, ${options.y})`)
 
   const spaceshipShape = [
@@ -95,6 +96,8 @@ function init(game) {
 
 function update(game: Game) {
   // Do stuff to update the game... nothing for now.
+  const ship = game.spaceship.Position
+  d3.select('#enterprise').attr('transform', `translate(${ship.x}, ${ship.y})`)
 }
 
 let midi = null // global MIDIAccess object
