@@ -1,6 +1,6 @@
 console.log('hi this is index.ts where the rapier code is')
 
-import gui, { drawSpaceship } from './d3spaceship'
+import gui, { drawSpaceship } from './graphics'
 import { Game } from './game'
 
 const options = {
