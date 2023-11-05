@@ -97,7 +97,9 @@ function init(game) {
 function update(game: Game) {
   // Do stuff to update the game... nothing for now.
   const ship = game.spaceship.Position
-  d3.select('#enterprise').attr('transform', `translate(${ship.x}, ${ship.y})`)
+  d3.select('#enterprise')
+  .transition()
+  .attr('transform', `translate(${ship.x}, ${ship.y})`)
 }
 
 let midi = null // global MIDIAccess object

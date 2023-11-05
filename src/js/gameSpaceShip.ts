@@ -28,6 +28,12 @@ export class SpaceShip {
     if (direction === 'down') {
       this.y += 50
     }
+    if (direction === 'forward') {
+        this.x += 50
+    }
+    if (direction === 'backward') {
+        this.x -= 50
+    }    
   }
 
   get Position() {
