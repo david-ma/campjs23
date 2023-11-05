@@ -21,7 +21,7 @@ export class Game {
     // let gravity = new rapier2d.Vector2(0.0, -9.81);
     let gravity = new rapier.Vector2(0, 0)
     this.world = new rapier.World(gravity)
-    this.asteroids = []
+    this.asteroids = [];
     this.eventQueue = new this.rapier.EventQueue(true)
     this.spaceship = new SpaceShip(this);
     this.wooshAudioContext = new AudioContext();
@@ -31,7 +31,9 @@ export class Game {
 
   }
 
-  SpawnAsteroid() {}
+  SpawnAsteroid() {
+    this.asteroids.push(new Asteroid(this));
+  }
   step() {
     this.world.step(this.eventQueue)
     this.world.debugRender();
@@ -58,7 +60,18 @@ export class Game {
   this.world.intersectionsWith(this.spaceship._rigidBody.collider(0), (otherCollider) => {
     // This closure is called on each collider potentially
     // intersecting the collider `collider`.
-    debugger;
+    // debugger;
+    let asteroid = this.asteroids.find((a)=> {
+      a._rigidBody.collider(0).handle === otherCollider.handle;
+    })
+    if (!asteroid) {
+      console.log("Something went wrong");
+      
+      debugger;
+    }
+    else {
+      asteroid.reflect();
+    }
 });
   }
 }
