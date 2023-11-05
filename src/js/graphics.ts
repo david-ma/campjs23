@@ -27,8 +27,8 @@ export function setup(options) {
 }
 
 export function drawSpaceship(spaceship) {
-  console.log('drawing ship')
-  console.log(d3)
+  // console.log('drawing ship')
+  // console.log(d3)
   const options = spaceship.Position
 
   const ship = screen

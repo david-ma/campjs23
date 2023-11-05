@@ -2,20 +2,21 @@ import { RigidBody } from '@dimforge/rapier2d'
 import { Game } from './game'
 
 export class SpaceShip {
-  private _rigidBody: RigidBody
+  public _rigidBody: RigidBody
   public shieldRad: number = 150
 
   constructor(private game: Game) {
     let rigidBodyDesc =
-      game.rapier.RigidBodyDesc.kinematicVelocityBased().setTranslation(
+      game.rapier.RigidBodyDesc.dynamic().setTranslation(
         200,
         300
       )
-    let rigidBody = game.world.createRigidBody(rigidBodyDesc)
-
-    // Create a cuboid collider attached to the dynamic rigidBody.
-    let colliderDesc = game.rapier.ColliderDesc.cuboid(0.5, 0.5)
-    let collider = game.world.createCollider(colliderDesc, rigidBody)
+    this._rigidBody = game.world.createRigidBody( rigidBodyDesc);
+    let colliderDesc = game.rapier.ColliderDesc.ball(this.shieldRad)
+    .setSensor(true);
+    let collider = game.world.createCollider(colliderDesc, this._rigidBody)
+    .setActiveCollisionTypes(game.rapier.ActiveCollisionTypes.DEFAULT|
+      game.rapier.ActiveCollisionTypes.KINEMATIC_FIXED);
   }
 
   get Position() {

@@ -2,7 +2,7 @@ console.log("hi this is index.ts where the rapier code is");
 
 import gui, { drawSpaceship } from "./graphics";
 import { Game } from "./game";
-import * as d3 from 'd3'
+import * as d3 from "d3";
 import { Vector2 } from "@dimforge/rapier2d";
 
 const options = {
@@ -11,7 +11,6 @@ const options = {
 };
 
 let screen = gui.setup(options);
-
 
 import("@dimforge/rapier2d").then((RAPIER) => {
   let game = new Game(RAPIER, options);
@@ -41,26 +40,47 @@ import("@dimforge/rapier2d").then((RAPIER) => {
   const ballsize = 100;
   let colliderDesc = game.rapier.ColliderDesc.ball(ballsize);
   let collider = game.world.createCollider(colliderDesc, rigidBody);
+  // collider.setSensor(true);
+  collider.setActiveCollisionTypes(game.rapier.ActiveCollisionTypes.DEFAULT|
+    game.rapier.ActiveCollisionTypes.KINEMATIC_FIXED);
   // Get mouse pos
 
-screen.on("click", function (event) {
-  var coordinates = d3.pointer(event);
-  var x = coordinates[0];
-  var y = coordinates[1];
-  rigidBody.setTranslation(new Vector2(x, y), true)
-  //Draw ball on mouse
-  
-  console.log("coordinates", coordinates);
-});
+  screen.on("click", function (event) {
+    var coordinates = d3.pointer(event);
+    var x = coordinates[0];
+    var y = coordinates[1];
+    // rigidBody.setTranslation(new Vector2(200, 300), true);
+    rigidBody.setTranslation(new Vector2(x, y), true);
+    console.log("setting the pos to 200, 300")
+    // rigidBody.setTranslation(new Vector2(x, y), true);
+    //Draw ball on mouse
 
+    screen.append("circle")
+      .attr("cx", x)
+      .attr("cy", y)
+      .attr("r", ballsize)
+      .attr("fill", 'red')
+      
+
+    console.log("coordinates", coordinates);
+  });
+
+
+//   (function animationLoop(prevMs) {
+//     const nowMs = window.performance.now()
+//     window.requestAnimationFrame(animationLoop.bind(null, nowMs));
+//     const deltaMs = nowMs - prevMs;
+//     step(deltaMs);
+//     draw();
+// })(window.performance.now());
   // // Game loop. Replace by your own game loop system.
   let gameLoop = () => {
     // Ste the simulation forward.
-    game.step()
+    game.step();
 
-    console.log("Hi we're here")
-    console.log("game", game)
-    gui.drawSpaceship(game.spaceship)
+    // console.log("Hi we're here");
+    // console.log("game", game);
+    gui.drawSpaceship(game.spaceship);
 
     game.asteroids.forEach((asteroid) => {
       gui.drawAsteroids(asteroid);
