@@ -107,6 +107,7 @@ function update(game: Game) {
   const asteroids = screen
     .selectAll('g.asteroid')
     .data(game.asteroids, (d: Asteroid) => {
+      console.log(d.uniqueID)
       return d.uniqueID
     })
 

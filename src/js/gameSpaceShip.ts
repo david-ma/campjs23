@@ -3,11 +3,14 @@ import { Game } from './game'
 
 export class SpaceShip {
   public _rigidBody: RigidBody
-  public shieldRad: number = 150
+  public shieldRad: number = 1
   private x: number = 200
   private y: number = 300
+  public uniqueID: string
 
   constructor(private game: Game) {
+    this.uniqueID = "ship"+(""+Math.random()).substring(2,7)
+
     let rigidBodyDesc =
       game.rapier.RigidBodyDesc.dynamic().setTranslation(
         200,

@@ -80,14 +80,18 @@ export class Game {
     // intersecting the collider `collider`.
     // debugger;
     let asteroid = this.asteroids.find((a)=> {
-      a._rigidBody.collider(0).handle === otherCollider.handle;
+        // @ts-ignore
+        a.uniqueID === otherCollider.uniqueID
+    //   a._rigidBody.collider(0).handle === otherCollider.handle;
     })
     if (!asteroid) {
       console.log("Something went wrong");
+      console.log("asteroid", asteroid)
+      console.log("otherCollider", otherCollider)
       
       debugger;
-    }
-    else {
+    } else {
+        console.log("refelct asteroid", asteroid)
       asteroid.reflect();
     }
 });
