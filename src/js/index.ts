@@ -5,6 +5,11 @@ import { Game } from './game'
 import * as d3 from 'd3'
 import { Vector2 } from '@dimforge/rapier2d'
 
+export type OptionsType = {
+  width: number,
+  height: number
+}
+
 const options = {
   width: 960,
   height: 600,

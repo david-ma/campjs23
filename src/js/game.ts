@@ -1,6 +1,7 @@
 import { World, EventQueue } from '@dimforge/rapier2d'
 import { Asteroid } from './asteroid'
 import { SpaceShip } from './gameSpaceShip'
+import { OptionsType } from 'js'
 
 // import type rapier from '@dimforge/rapier2d';
 export type rapier2d = typeof import('@dimforge/rapier2d')
@@ -12,7 +13,11 @@ export class Game {
   private eventQueue: EventQueue;
   private wooshAudioContext: AudioContext;
   private wooshSound: HTMLAudioElement;
-  constructor(public rapier: rapier2d, public options) {
+
+  private shieldAudios: HTMLAudioElement[];
+  private asteroidAudios: HTMLAudioElement[];
+
+  constructor(public rapier: rapier2d, public options:OptionsType) {
     // let gravity = new rapier2d.Vector2(0.0, -9.81);
     let gravity = new rapier.Vector2(0, 0)
     this.world = new rapier.World(gravity)
