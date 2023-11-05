@@ -10,6 +10,8 @@ export class Game {
   public asteroids: Asteroid[]
   public spaceship: SpaceShip
   private eventQueue: EventQueue;
+  private wooshAudioContext: AudioContext;
+  private wooshSound: HTMLAudioElement;
   constructor(public rapier: rapier2d, public options) {
     // let gravity = new rapier2d.Vector2(0.0, -9.81);
     let gravity = new rapier.Vector2(0, 0)
@@ -17,6 +19,11 @@ export class Game {
     this.asteroids = []
     this.eventQueue = new this.rapier.EventQueue(true)
     this.spaceship = new SpaceShip(this);
+    this.wooshAudioContext = new AudioContext();
+    this.wooshSound = document.getElementById("wooshSound") as (HTMLAudioElement);
+// pass it into the audio context
+// const track = this.wooshAudioContext.createMediaElementSource(wooshSound);
+
   }
 
   SpawnAsteroid() {}
