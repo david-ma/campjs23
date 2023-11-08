@@ -20,7 +20,8 @@ export class Asteroid {
     this.uniqueID = "asteroid"+(""+Math.random()).substring(2,7)
 
     // Create a dynamic rigid-body.
-    let randx = game.options.width + Math.random() * 50;
+    // let randx = game.options.width + Math.random() * 50;
+    let randx = game.options.width + 100;
     let randy = Math.random() * game.options.height;
     this.radius = minRad + Math.random() * (maxRad - minRad);
     let rigidBodyDesc =
@@ -35,7 +36,10 @@ export class Asteroid {
     let collider = game.world.createCollider(colliderDesc, this._rigidBody)
     collider.setActiveEvents(game.rapier.ActiveEvents.COLLISION_EVENTS);
     let loc = new Vector2(randx, randy);
-    let vel = new Vector2(game.spaceship.Position.x - loc.x,game.spaceship.Position.y - loc.y );
+    // let vel = new Vector2(game.spaceship.Position.x - loc.x,game.spaceship.Position.y - loc.y );
+    // The asteroid should just fly to the left
+    let vel = new Vector2(-1, 0);
+
     let mag = magnitude(vel);
     let speed = minVel + Math.random() * (maxVel - minVel);
     vel = new Vector2((vel.x/mag) * speed, (vel.y/mag) * speed);

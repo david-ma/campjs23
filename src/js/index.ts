@@ -11,8 +11,8 @@ export type OptionsType = {
 }
 
 const options = {
-  width: 960,
-  height: 600,
+  width: 3000,
+  height: 1500,
 }
 
 let screen = gui.setup(options)
@@ -103,8 +103,45 @@ import('@dimforge/rapier2d').then((RAPIER) => {
 
     gui.update(game)
 
+    spawnRandom(game)
+
     setTimeout(gameLoop, 16)
   }
 
   gui.welcome(gameLoop)
 })
+
+function spawnRandom(game) {
+  // console.log("rolling dice")
+  // 1 in 100 chance to spawn
+  if(Math.random() < 0.01) {
+    game.SpawnAsteroid()
+  }
+}
+
+// function draw(timestamp) {
+//   drawBackground();
+//   drawPlayer();
+//   requestAnimationFrame(draw)
+// }
+
+// const spaceship = {
+//   size: 1,
+//   x: 200,
+//   y: 300,
+// }
+
+// gui.drawSpaceship(spaceship)
+
+// // type Asteroid = {
+// //   x: number
+// //   y: number
+// // }
+// const asteroids = [
+//   {
+//     x: 800,
+//     y: 300,
+//   },
+// ]
+
+// gui.drawAsteroids(asteroids)

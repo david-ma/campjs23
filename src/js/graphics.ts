@@ -12,6 +12,7 @@ let width = 960,
 
 const screen = d3.select('#screen').append('svg')
 let shields = null
+let globalGame = null
 
 export function setup(options) {
   console.log('Running setup()')
@@ -132,6 +133,7 @@ export function draw_debug(buffer: DebugRenderBuffers) {
 
 function init(game) {
   drawSpaceship(game.spaceship)
+  globalGame = game
 
   game.asteroids.forEach((asteroid) => {
     drawAsteroids(asteroid)
@@ -239,6 +241,8 @@ function listInputsAndOutputs(midiAccess) {
   }
 }
 
+
+let green = 64;
 function onMIDIMessage(event) {
   let str = `MIDI message received at timestamp ${event.timeStamp}[${event.data.length} bytes]: `
   let signal = ''
@@ -257,6 +261,17 @@ function onMIDIMessage(event) {
     if (signal.slice(0, 8) == '0xb0 0x1') {
       console.log('heyyy')
       tuneShields(val)
+    }
+
+    if (signal.slice(0, 8) == '0xb0 0x2') {
+      if(green > val) {
+        globalGame.spaceship.move('up')
+      } else {
+        globalGame.spaceship.move('down')        
+      }
+      green = val
+      // console.log('move ship')
+      // tuneShields(val)
     }
   }
   // 0xb0 0x2 0xc

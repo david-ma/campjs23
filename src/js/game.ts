@@ -7,6 +7,7 @@ import { draw_debug } from './graphics'
 // import type rapier from '@dimforge/rapier2d';
 export type rapier2d = typeof import('@dimforge/rapier2d')
 
+var crashAudio = new Audio("/audio/crash.m4a")
 export class Game {
   public world: World
   public asteroids: Asteroid[]
