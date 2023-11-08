@@ -36,23 +36,6 @@ function initAudio() {
 import('@dimforge/rapier2d').then((RAPIER) => {
   let game = new Game(RAPIER, options)
 
-  // Use the RAPIER module here.
-  // let gravity = { x: 0.0, y: -9.81 };
-  // let world = new RAPIER.World(gravity);
-
-  // // Create the ground
-  // let groundColliderDesc = RAPIER.ColliderDesc.cuboid(10.0, 0.1);
-  // world.createCollider(groundColliderDesc);
-
-  // // Create a dynamic rigid-body.
-  // let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-  //         .setTranslation(0.0, 1.0);
-  // let rigidBody = world.createRigidBody(rigidBodyDesc);
-
-  // // Create a cuboid collider attached to the dynamic rigidBody.
-  // let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5);
-  // let collider = world.createCollider(colliderDesc, rigidBody);
-
   //make a collider on the mouse and make a debug collision thing on it
   let rigidBodyDesc =
     game.rapier.RigidBodyDesc.kinematicPositionBased().setTranslation(800, 300)
@@ -61,10 +44,9 @@ import('@dimforge/rapier2d').then((RAPIER) => {
   const ballsize = 100;
   let colliderDesc = game.rapier.ColliderDesc.ball(ballsize);
   let collider = game.world.createCollider(colliderDesc, rigidBody);
-  // collider.setSensor(true);
-  collider.setActiveCollisionTypes(game.rapier.ActiveCollisionTypes.DEFAULT|
-    game.rapier.ActiveCollisionTypes.KINEMATIC_FIXED);
-  // Get mouse pos
+  // This is the thing that enables the collision events to be drained
+  collider.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
+  
 
   screen.on("click", function (event) {
     if(!audio) {
@@ -75,10 +57,19 @@ import('@dimforge/rapier2d').then((RAPIER) => {
     var y = coordinates[1];
     // rigidBody.setTranslation(new Vector2(200, 300), true);
     rigidBody.setTranslation(new Vector2(x, y), true);
+
     console.log("setting the pos to 200, 300")
     // rigidBody.setTranslation(new Vector2(x, y), true);
     //Draw ball on mouse
 
+    screen.append("circle")
+      .attr("cx", x)
+      .attr("cy", y)
+      .attr("r", ballsize)
+      .attr("fill", 'red')
+
+    console.log("coordinates", coordinates);
+  });
 
   addEventListener('keypress', (event) => {
     console.log("Press!")
@@ -101,31 +92,13 @@ import('@dimforge/rapier2d').then((RAPIER) => {
         game.spaceship.move('backward')
         break
     }
-  })
-
-    // screen.append("circle")
-    //   .attr("cx", x)
-    //   .attr("cy", y)
-    //   .attr("r", ballsize)
-    //   .attr("fill", 'red')
-      // .style("display", 'none')
-      
-
-    console.log("coordinates", coordinates);
   });
 
-
-//   (function animationLoop(prevMs) {
-//     const nowMs = window.performance.now()
-//     window.requestAnimationFrame(animationLoop.bind(null, nowMs));
-//     const deltaMs = nowMs - prevMs;
-//     step(deltaMs);
-//     draw();
-// })(window.performance.now());
   // // Game loop. Replace by your own game loop system.
   gui.init(game)
   let gameLoop = () => {
-    // Ste the simulation forward.
+    // Set the simulation forward.
+    // Rapier uses an internal deltaTime so raf is not needed
     game.step();
 
     gui.update(game)
@@ -135,30 +108,3 @@ import('@dimforge/rapier2d').then((RAPIER) => {
 
   gui.welcome(gameLoop)
 })
-
-// function draw(timestamp) {
-//   drawBackground();
-//   drawPlayer();
-//   requestAnimationFrame(draw)
-// }
-
-// const spaceship = {
-//   size: 1,
-//   x: 200,
-//   y: 300,
-// }
-
-// gui.drawSpaceship(spaceship)
-
-// // type Asteroid = {
-// //   x: number
-// //   y: number
-// // }
-// const asteroids = [
-//   {
-//     x: 800,
-//     y: 300,
-//   },
-// ]
-
-// gui.drawAsteroids(asteroids)

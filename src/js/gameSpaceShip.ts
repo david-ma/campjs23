@@ -3,7 +3,7 @@ import { Game } from './game'
 
 export class SpaceShip {
   public _rigidBody: RigidBody
-  public shieldRad: number = 1
+  public shieldRad: number = 150
   private x: number = 200
   private y: number = 300
   public uniqueID: string
@@ -20,8 +20,6 @@ export class SpaceShip {
     let colliderDesc = game.rapier.ColliderDesc.ball(this.shieldRad)
     .setSensor(true);
     let collider = game.world.createCollider(colliderDesc, this._rigidBody)
-    .setActiveCollisionTypes(game.rapier.ActiveCollisionTypes.DEFAULT|
-      game.rapier.ActiveCollisionTypes.KINEMATIC_FIXED);
   }
 
   move(direction) {

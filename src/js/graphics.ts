@@ -3,6 +3,8 @@ console.log('Drawing a d3 spaceship')
 import { Asteroid } from './asteroid'
 import { Game } from './game'
 import * as d3 from 'd3'
+import { SpaceShip } from './gameSpaceShip'
+import { DebugRenderBuffers } from '@dimforge/rapier2d'
 
 // import * as d3 from 'd3-selection-multi'
 let width = 960,
@@ -29,7 +31,7 @@ export function setup(options) {
   return screen
 }
 
-export function drawSpaceship(spaceship) {
+export function drawSpaceship(spaceship: SpaceShip) {
   // console.log('drawing ship')
   // console.log(d3)
   const options = spaceship.Position
@@ -59,7 +61,7 @@ export function drawSpaceship(spaceship) {
     .append('circle')
     .attr('id', 'shields')
     .attr('cx', 10)
-    .attr('r', 150)
+    .attr('r', spaceship.shieldRad)
     .attr('stroke-width', 3)
     .attr('stroke', 'white')
     .attr('fill', 'none')
@@ -113,6 +115,19 @@ function welcome(callback) {
     welcome.remove()
     callback()
   })
+}
+
+export function draw_debug(buffer: DebugRenderBuffers) {
+
+  for (let i = 0; i < buffer.vertices.length; i += 4) {
+    const line = [[buffer.vertices[i], buffer.vertices[i + 1]], [buffer.vertices[i + 2], buffer.vertices[i + 3]]]
+    screen
+      .append('line')
+      .attr('points', line.map((d) => d.join(',')).join(' '))
+      .attr('stroke', 'black')
+      .attr('stroke-width', 6)
+      .attr('fill', 'none')
+  }
 }
 
 function init(game) {
@@ -209,10 +224,10 @@ function listInputsAndOutputs(midiAccess) {
     const input = entry[1]
     console.log(
       `Input port [type:'${input.type}']` +
-        ` id:'${input.id}'` +
-        ` manufacturer:'${input.manufacturer}'` +
-        ` name:'${input.name}'` +
-        ` version:'${input.version}'`
+      ` id:'${input.id}'` +
+      ` manufacturer:'${input.manufacturer}'` +
+      ` name:'${input.name}'` +
+      ` version:'${input.version}'`
     )
   }
 

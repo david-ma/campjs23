@@ -22,7 +22,7 @@ export class Asteroid {
     // Create a dynamic rigid-body.
     let randx = game.options.width + Math.random() * 50;
     let randy = Math.random() * game.options.height;
-    let radius = minRad + Math.random() * (maxRad - minRad);
+    this.radius = minRad + Math.random() * (maxRad - minRad);
     let rigidBodyDesc =
       game.rapier.RigidBodyDesc.kinematicVelocityBased().setTranslation(
         randx,
@@ -31,8 +31,9 @@ export class Asteroid {
     this._rigidBody = game.world.createRigidBody(rigidBodyDesc)
 
     // Create a cuboid collider attached to the dynamic rigidBody.
-    let colliderDesc = game.rapier.ColliderDesc.ball(radius);
+    let colliderDesc = game.rapier.ColliderDesc.ball(this.radius);
     let collider = game.world.createCollider(colliderDesc, this._rigidBody)
+    collider.setActiveEvents(game.rapier.ActiveEvents.COLLISION_EVENTS);
     let loc = new Vector2(randx, randy);
     let vel = new Vector2(game.spaceship.Position.x - loc.x,game.spaceship.Position.y - loc.y );
     let mag = magnitude(vel);
