@@ -15,15 +15,15 @@
     "moduleResolution": "bundler",
     // "allowImportingTsExtensions": true,
     // "emitDeclarationOnly": true,
-    "esModuleInterop": true,
+    // "esModuleInterop": true,
     "removeComments": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
     "noImplicitReturns": false,
     "noUnusedLocals": false,
-    "assumeChangesOnlyAffectDirectDependencies": true,
+    // "assumeChangesOnlyAffectDirectDependencies": true,
     "incremental": true,
-    "lib": [ "esnext", "dom.iterable", "dom"]
+    // "lib": [ "esnext", "dom.iterable", "dom"]
   },
   "include": [
     "src/**/*"
