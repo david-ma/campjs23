@@ -141,7 +141,7 @@ function init(game) {
 }
 
 function update(game: Game) {
-  console.log('Updating game')
+  // console.log('Updating game')
   // console.log(game.asteroids)
   // Do stuff to update the game... nothing for now.
   const ship = game.spaceship.Position

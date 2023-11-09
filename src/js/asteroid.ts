@@ -16,7 +16,7 @@ export class Asteroid {
   public uniqueID: string;
 
   constructor(game: Game) {
-    console.log("Constructing Asteroid")
+    // console.log("Constructing Asteroid")
     this.uniqueID = "asteroid"+(""+Math.random()).substring(2,7)
 
     // Create a dynamic rigid-body.

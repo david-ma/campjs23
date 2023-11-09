@@ -11,7 +11,7 @@ export type OptionsType = {
 }
 
 const options = {
-  width: 3000,
+  width: 1500,
   height: 1500,
 }
 
@@ -72,7 +72,7 @@ import('@dimforge/rapier2d').then((RAPIER) => {
   });
 
   addEventListener('keypress', (event) => {
-    console.log("Press!")
+    // console.log("Press!")
     if(audio) {
       audio.play()
     }
@@ -96,6 +96,13 @@ import('@dimforge/rapier2d').then((RAPIER) => {
 
   // // Game loop. Replace by your own game loop system.
   gui.init(game)
+
+// Debugger to see what objects are around
+  globalThis.listAllObjects = function() {
+    console.log("Ship", game.spaceship)
+    console.log("Asteroids", game.asteroids)
+  }
+
   let gameLoop = () => {
     // Set the simulation forward.
     // Rapier uses an internal deltaTime so raf is not needed
@@ -118,6 +125,7 @@ function spawnRandom(game) {
     game.SpawnAsteroid()
   }
 }
+
 
 // function draw(timestamp) {
 //   drawBackground();

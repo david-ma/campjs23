@@ -3,9 +3,9 @@ import { Game } from './game'
 
 export class SpaceShip {
   public _rigidBody: RigidBody
-  public shieldRad: number = 150
-  private x: number = 200
-  private y: number = 300
+  public shieldRad: number = 100
+  private x: number = 20
+  private y: number = 30
   public uniqueID: string
 
   constructor(private game: Game) {
@@ -23,7 +23,7 @@ export class SpaceShip {
   }
 
   move(direction) {
-    console.log("moving ship")
+    // console.log("moving ship")
     if (direction === 'up') {
       this.y -= 50
     }

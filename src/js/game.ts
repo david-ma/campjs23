@@ -83,3 +83,34 @@ export class Game {
     })
   }
 }
+
+
+//     this.eventQueue.drainContactForceEvents(event => {
+//       let handle1 = event.collider1(); // Handle of the first collider involved in the event.
+//       let handle2 = event.collider2(); // Handle of the second collider involved in the event.
+//       /* Handle the contact force event. */
+//       debugger;
+//   });
+//   this.world.intersectionsWith(this.spaceship._rigidBody.collider(0), (otherCollider) => {
+//     // This closure is called on each collider potentially
+//     // intersecting the collider `collider`.
+//     // debugger;
+//     let asteroid = this.asteroids.find((a)=> {
+//         // @ts-ignore
+//         a.uniqueID === otherCollider.uniqueID
+//     //   a._rigidBody.collider(0).handle === otherCollider.handle;
+//     })
+//     if (!asteroid) {
+//       // Only play the sound once
+
+//       console.log("Something went wrong");
+//       console.log("asteroid", asteroid)
+//       console.log("otherCollider", otherCollider)
+//       crashAudio.play()
+  
+//     //   debugger;
+//     } else {
+//         console.log("refelct asteroid", asteroid)
+//       asteroid.reflect();
+//     }
+// });
